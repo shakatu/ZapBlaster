@@ -1,0 +1,17 @@
+#!/system/bin/sh
+
+echo 1200000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/gpu_max_freq_idx
+echo 1200000 > /sys/power/cpufreq_max_limit
+echo 2048 > /sys/devices/virtual/bdi/179:0/read_ahead_kb
+echo "8192,10240,12288,28342,31041,33740" > /sys/module/lowmemorykiller/parameters/minfree
+
+#!/sbin/busybox sh
+
+# NFS filesystem
+insmod /system/lib/modules/sunrpc.ko
+insmod /system/lib/modules/lockd.ko
+insmod /system/lib/modules/nfs.ko
+
+# NTFS filesystem
+insmod /system/lib/modules/ntfs.ko
